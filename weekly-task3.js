@@ -7,19 +7,19 @@
 const url = "http://jsonplaceholder.typicode.com/users";
 const fetchData = async () => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url); //asycnhronous
     // cek kalau fetch gagal
     if (!response.ok){
       throw new Error("Error Url JSON");
     }
-    const data = await response.json();
+    const data = await response.json(); //asycnhronous
 
     // cek data apakah kosong
     if (!data){
       throw new Error("Not found JSON");
     }
 
-    showData(data)
+    showData(data) // sycnhronous
     
   } catch (err){
     console.log("Error Message: ", err.message);
@@ -32,8 +32,10 @@ function showData(name){
     name: a.name,
     city: a.address.city
   }))
-  const result = dataName.sort((a, b) => a.city.localeCompare(b.city));
-  result.map((a, index) => {
+  // method chaining
+  dataName
+  .sort((a, b) => a.city.localeCompare(b.city)) // urutkan nama kota dari a-z
+  .map((a, index) => {  // tampilkan data nama orang dengan kotanya
     console.log(`${index + 1}. ${a.name} (${a.city})`);
   })
 }
